@@ -2,7 +2,7 @@
 Este proyecto consiste en un conjunto de rutas CRUD (Crear, Leer, Actualizar, Eliminar) implementadas con FastAPI, que interactúan con una base de datos MongoDB Atlas. Proporciona operaciones básicas para gestionar alertas almacenadas en la base de datos, permitiendo agregar nuevas alertas, modificar existentes, eliminar alertas y obtener información de las alertas almacenadas.
 
 
-## ***Requerimientos.***
+## ***Requerimientos:***
 ### Python 3.7 o superior
 ### Instalación de las librerías especificadas en requirements.txt
 ### Acceso a una base de datos MongoDB (en este caso se utiliza MongoDB Atlas)
