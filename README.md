@@ -13,9 +13,8 @@ Este proyecto consiste en un conjunto de rutas CRUD (Crear, Leer, Actualizar, El
 Clona el repositorio:
 
 bash
-´´´
-git clone https://github.com/Matias-Rodriguez81/metrica-alerta2
-´´´
+`git clone https://github.com/Matias-Rodriguez81/metrica-alerta2`
+
 
 ### *Configuración*
 Antes de ejecutar la aplicación, asegúrate de configurar correctamente la conexión a tu base de datos MongoDB Atlas. Para ello, modifica el valor de connection_string en el archivo main.py con tu propia cadena de conexión proporcionada por MongoDB Atlas o crea en archivo .env con tús credenciales (si tienes dudas ver archivo .env.example).
@@ -27,9 +26,9 @@ Para ejecutar la aplicación utilizando Docker, sigue estos pasos:
 ### Construye la imagen Docker:
 
 bash
-´´´
-docker compose up -d
-´´´
+
+`docker compose up -d`
+
 
 Esto iniciará el contenedor Docker con la aplicación FastAPI. Puedes acceder a la aplicación en http://127.0.0.1:8000/docs
 
