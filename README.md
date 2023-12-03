@@ -20,7 +20,7 @@ bash
 Antes de ejecutar la aplicación, asegúrate de configurar correctamente la conexión a tu base de datos MongoDB Atlas. Para ello, modifica el valor de connection_string en el archivo main.py con tu propia cadena de conexión proporcionada por MongoDB Atlas o crea en archivo .env con tús credenciales (si tienes dudas ver archivo .env.example).
 
 ### ***Uso***
-Ejecución con Docker
+### **Ejecución con Docker**
 Para ejecutar la aplicación utilizando Docker, sigue estos pasos:
 
 ### Construye la imagen Docker:
