@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+
+  fastapi-main:
+    build:
+     context: ./app  # Ruta al directorio donde se encuentra tu aplicación FastAPI (donde está el Dockerfile)
+    ports:
+     - "8000:8000"  # Mapeo del puerto del contenedor al puerto del host
+      
+  
