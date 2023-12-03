@@ -53,7 +53,32 @@ async def add_alerta(alerta: Alerta):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al insertar la alerta: {str(e)}")
 
+# Ruta para modificar una alerta por su ID
+@app.put("/modificar_alerta/{alerta_id}")
+async def modificar_alerta(alerta_id: str, alerta_actualizada: Alerta):
+    try:
+        # Convertir el ID de la alerta a ObjectId
+        obj_id = ObjectId(alerta_id)
 
+        # Verificar si la alerta con el ID proporcionado existe en la base de datos
+        if collection.count_documents({"_id": obj_id}) == 0:
+            raise HTTPException(status_code=404, detail="Alerta no encontrada")
+
+        # Convertir la alerta actualizada a un diccionario
+        nueva_data = alerta_actualizada.dict()
+
+        # Actualizar la alerta en la base de datos
+        result = collection.update_one({"_id": obj_id}, {"$set": nueva_data})
+
+        if result.modified_count == 1:
+            return {"mensaje": "Alerta modificada correctamente"}
+        else:
+            return {"mensaje": "No se realizó ninguna modificación"}
+
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=f"Error de validación: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al modificar la alerta: {str(e)}")
 
 
 # Ruta para obtener todos los documentos de la colección
@@ -67,8 +92,8 @@ async def get_documentos():
             doc['_id'] = str(doc['_id'])
 
     return {"Todas las Alertas sin Ordenar": documentos}
-    
-  
+
+   
 # Ruta para obtener documentos ordenados por usuario y fecha de incidente
 @app.get("/documentos_ordenados")
 async def get_documentos_ordenados():
@@ -83,3 +108,25 @@ async def get_documentos_ordenados():
             doc['_id'] = str(doc['_id'])
 
     return {"Alertas Ordenadas por Usuario y Fecha": documentos_ordenados}
+
+# Ruta para eliminar una alerta por su ID
+@app.delete("/eliminar_alerta/{alerta_id}")
+async def eliminar_alerta(alerta_id: str):
+    try:
+        # Convertir el ID de la alerta a ObjectId
+        obj_id = ObjectId(alerta_id)
+
+        # Verificar si la alerta con el ID proporcionado existe en la base de datos
+        if collection.count_documents({"_id": obj_id}) == 0:
+            raise HTTPException(status_code=404, detail="Alerta no encontrada")
+
+        # Eliminar la alerta de la base de datos
+        result = collection.delete_one({"_id": obj_id})
+
+        if result.deleted_count == 1:
+            return {"mensaje": "Alerta eliminada correctamente"}
+        else:
+            return {"mensaje": "No se eliminó ninguna alerta"}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al eliminar la alerta: {str(e)}")
