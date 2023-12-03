@@ -1,15 +1,20 @@
 from bson import ObjectId  # Importa la clase ObjectId desde pymongo
-from bson import json_util #sean más legibles los datos devueltos
+from bson import json_util # sean más legibles los datos devueltos
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, validator
 import pymongo
+import os # Protege mis credenciales
+from decouple import config # Protege mis credenciales
 
 app = FastAPI()
 
+# Lee las credenciales desde las variables de entorno
+mongo_user = config('MONGO_USER')
+mongo_password = config('MONGO_PASSWORD')
+
 #Ingreso a Mongo Atlas
-connection_string = "mongodb+srv://matiasproyectos81:VQcflxQR1Na1qq3w@cluster0.ncwpcud.mongodb.net/PROJECT0?retryWrites=true&w=majority"
-# Usuario de Mongo Atlas: matiasproyectos81
-# VQcflxQR1Na1qq3w (password MONGO ATLAS)
+# Construye la cadena de conexión con las credenciales
+connection_string = f"mongodb+srv://{mongo_user}:{mongo_password}@cluster0.ncwpcud.mongodb.net/PROJECT0?retryWrites=true&w=majority"
 
 database_name = "Alertas"
 collection_name = "Diciembre_2023" 
