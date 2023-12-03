@@ -13,7 +13,7 @@ Este proyecto consiste en un conjunto de rutas CRUD (Crear, Leer, Actualizar, El
 Clona el repositorio:
 
 bash
-`git clone https://github.com/Matias-Rodriguez81/metrica-alerta2`
+`git clone https://github.com/Matias-Rodriguez81/metrica-alerta2.git`
 
 
 ### *Configuración*
