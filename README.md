@@ -26,7 +26,6 @@ Para ejecutar la aplicación utilizando Docker, sigue estos pasos:
 ### Construye la imagen Docker:
 
 bash
-
 `docker compose up -d`
 
 
