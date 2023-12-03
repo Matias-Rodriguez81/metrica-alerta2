@@ -5,6 +5,8 @@ from pydantic import BaseModel, Field, validator
 import pymongo
 import os # Protege mis credenciales
 from decouple import config # Protege mis credenciales
+from datetime import datetime
+
 
 app = FastAPI()
 
@@ -29,16 +31,32 @@ collection = db[collection_name]
 #Ingresar Datos
 class Alerta(BaseModel):
     usuario: str = Field(..., title="Nombre de usuario")
-    fecha_incidente: str = Field(..., title="Fecha del incidente")
+    fecha_incidente: str = Field(..., title="Fecha del incidente (dd-mm-yy)")
     descripcion: str = Field(..., title="Descripción de la alerta")
     equipo: str = Field(..., title="Nombre del equipo")
 
+    
+        
+    # Aquí puedes agregar lógica adicional para validar el formato de la fecha si es necesario
+    # Por ejemplo, verificar si la fecha sigue un formato específico
     @validator('fecha_incidente')
     def fecha_formato_valido(cls, v):
-        # Aquí puedes agregar lógica adicional para validar el formato de la fecha si es necesario
-        # Por ejemplo, verificar si la fecha sigue un formato específico
+        formatos_fecha = ['%d-%m-%y', '%d/%m/%y']  # Lista de formatos de fecha a validar
+
+        for formato in formatos_fecha:
+            try:
+                # Intenta convertir la cadena a un objeto datetime con los diferentes formatos
+                datetime.strptime(v, formato)
+                return v  # Si se pudo convertir con éxito, se acepta y se devuelve la fecha
+            except ValueError:
+                continue  # Si no coincide con el formato, continúa con el siguiente formato
+
+        # Si no coincide con ninguno de los formatos esperados, levanta un error
+        raise ValueError('Formato de fecha inválido. Utiliza el formato DD-MM-YY o DD/MM/YY')
+
         return v
 
+    
     @validator('*')
     def no_campos_vacios(cls, v):
         if not v.strip():
