@@ -42,7 +42,7 @@ class Alerta(BaseModel):
     # Por ejemplo, verificar si la fecha sigue un formato específico
     @validator('fecha_incidente')
     def fecha_formato_valido(cls, v):
-        formatos_fecha = ['%d-%m-%y', '%d/%m/%y']  # Lista de formatos de fecha a validar
+        formatos_fecha = ['%d-%m-%y', '%d/%m/%y', '%d-%m-%Y', '%d/%m/%Y'] # Lista de formatos de fecha a validar
 
         for formato in formatos_fecha:
             try:
