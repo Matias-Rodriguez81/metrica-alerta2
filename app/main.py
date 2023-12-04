@@ -63,7 +63,7 @@ class Alerta(BaseModel):
             raise ValueError('No se permiten campos vacíos')
         return v.strip()
 
-#    Ruta para Ingresar Datos
+#  Ruta para Ingresar Datos
 @app.post("/nueva_alerta")
 async def add_alerta(alerta: Alerta):
     try:
@@ -102,6 +102,7 @@ async def modificar_alerta(alerta_id: str, alerta_actualizada: Alerta):
         raise HTTPException(status_code=422, detail=f"Error de validación: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al modificar la alerta: {str(e)}")
+
 
 
 # Ruta para obtener todos los documentos de la colección
