@@ -8,7 +8,8 @@ from decouple import config # Protege mis credenciales
 from datetime import datetime
 
 
-app = FastAPI()
+app = FastAPI(title='FastAPI MongoDB CRUD with Docker', description='MatiasProyects :)',
+              version='1.1')
 
 # Lee las credenciales desde las variables de entorno
 mongo_user = config('MONGO_USER')
